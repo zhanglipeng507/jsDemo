@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8"/>
+    <title>Title of the document</title>
+</head>
+
+<body>
+The content of the document......
+<script>
+    var htm = '<!DOCTYPE html><html><head><meta Charset="UTF-8"/><title>Title of the document</title></head><body>The content of the document...... </body></html>'
+
+    var HTML_REGEXP = /<|&#?\w+;/;
+
+    function jqLiteIsTextNode(html) {
+        return !HTML_REGEXP.test(html);
+    }
+    console.log(jqLiteIsTextNode(htm));
+</script>
+</body>
+</html>

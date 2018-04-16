@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8"/>
+    <title>Title of the document</title>
+</head>
+
+<body>
+<button onclick="handleClick()"></button>
+The content of the document......
+<script type="text/javascript">
+//    window.onbeforeunload = function(e){
+//        console.log(e)
+//        return 'aaaaaaa'
+//    }
+//    function handleClick(){
+//        console.log('click!');
+//    }
+//    function beforeUnloadHandler(event){
+//        event.returnValue = "这是一段自定义信息";
+//    }
+//    window.addEventListener('beforeunload',beforeUnloadHandler,true);
+    window.onbeforeunload=function (){
+        console.log('aaa')
+//        return true;
+        createIframe();
+        return true;
+    }
+function createIframe(){
+    var iframe = document.createElement('iframe');
+    iframe.src = 'http://www.ifeng.com';
+    iframe.style.width = '100%';
+    iframe.style.height = '300px';
+    document.body.appendChild(iframe);
+}
+</script>
+</body>
+</html>

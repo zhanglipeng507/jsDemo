@@ -1,0 +1,46 @@
+<!DOCTYPE html  >
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>js执行机制 同步与异步</title>
+</head>
+
+<body>
+The content of the document......
+<script>
+    setTimeout(function(){
+        console.log(1);
+    },0);
+
+    console.log(2);
+    console.log(3);
+    console.log(4);
+    console.log(5);
+
+    var res;
+
+    var promise = new Promise(function(resolve,reject){
+        res = Math.random() * 10;
+        console.log(6);
+        if(res > 5){
+            console.log(7)
+            setTimeout(function(){
+                resolve(res);
+            },0);
+            //resolve(res)
+            console.log(8)
+        }else{
+            reject(res)
+        }
+    });
+
+    promise.then(function(success){
+        console.log(success)
+    }).catch(function(erro){
+        console.log(erro)
+    })
+    console.log(9);
+    console.log('res: ' ,res)
+</script>
+</body>
+</html>

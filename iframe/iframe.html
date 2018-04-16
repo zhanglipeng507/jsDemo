@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<title>Title of the document</title>
+<style type="text/css">
+    .iframe{
+        width:100%;
+        height:900px;
+    }
+</style>
+</head>
+<body>
+    <p>下面会出现一个iframe！</p>
+    <!--<iframe src="http://www.baidu.com" class="iframe"></iframe>-->
+<script>
+    function createIframe(){
+        var iframe = document.createElement('iframe');
+        iframe.src = 'http://www.ifeng.com';
+        iframe.style.width = '100%';
+        iframe.style.height = '300px';
+        document.body.appendChild(iframe);
+    }
+    window.onload = createIframe();
+</script>
+</body>
+</html>

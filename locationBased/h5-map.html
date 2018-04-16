@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8"/>
+    <title>h5地理定位-百度地图</title>
+</head>
+
+<body>
+In the localization of......
+<div id="demo"></div>
+<!--<img style="width:400px;height:300px;" src="http://api.map.baidu.com/staticimage?width=400&height=300&center=31.3,121.5&zoom=11"/>-->
+<!----- 定位 case1-------------------->
+<script>
+    //    var x=document.getElementById("demo");
+    //    function getLocation()
+    //    {
+    //        if (navigator.geolocation)
+    //        {
+    //            navigator.geolocation.getCurrentPosition(showPosition);
+    //        }
+    //        else{x.innerHTML="Geolocation is not supported by this browser.";}
+    //    }
+    //    function showPosition(position)
+    //    {
+    //        x.innerHTML="Latitude: " + position.coords.latitude +
+    //            "<br />Longitude: " + position.coords.longitude;
+    //    }
+    //    getLocation();
+</script>
+<!-- html5 定位API--------------------->
+<script>
+    function getLocation(){
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(handleLocation,hanldeErro);
+            console.log('定位进行中...');
+        }else{
+            console.log('不支持地理定位！');
+        }
+    }
+    function handleLocation(position){
+        console.log('定位成功!')
+        console.log("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+
+        var imgUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${position.coords.latitude},${position.coords.longitude}&zoom=14&size=400x300&sensor=false`;
+
+        document.getElementById('demo').innerHTML = `<img src=${imgUrl} style="width:100%;"/>`
+    }
+    function hanldeErro(e){
+        console.log(e.message);
+    }
+
+    getLocation();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8"/>
+    <title>同步回调与异步回调</title>
+</head>
+
+<body>
+The content of the document......
+<script src="socian.com/app.js" type="text/javascript">
+    console.log('没加载下来js 我照样执行了！')
+</script>
+<script>
+
+    /*
+    * 同步回调
+    *
+    * */
+
+    function foo(callback){
+
+        callback && callback();
+        console.log('I am first fun');
+    }
+
+    function callback() {
+        console.log('I am callback');
+    }
+
+    foo(callback);
+
+
+    /*
+    * 异步回调
+    *
+    * */
+
+    function foo1(callback){
+
+        callback && setTimeout(callback,0);
+        console.log('I am foo1');
+    }
+
+    function callback1(){
+        console.log('I am callback1');
+    }
+
+    foo1(callback1);
+</script>
+</body>
+</html>

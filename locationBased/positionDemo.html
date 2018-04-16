@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>百度地图定位</title>
+</head>
+<style type="text/css">
+    html{height:100%;}
+    body{height:100%;width:100%;margin:0px;padding:0px;}
+    #container{height:100%;}
+</style>
+<body>
+    <div id="container"></div>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=ug6NtT9mLu4lYB7dDOHAVkj3l7dNOPZr"></script>
+    <script>
+        window.onload = function () {
+           /* //创建地图实例
+            var map = new BMap.Map('container');
+            var point = new BMap.Point(121.5177827373, 31.2997722788);
+            map.centerAndZoom(point, 15);
+            map.addControl(new BMap.NavigationControl());*/
+
+           /*
+           * 坐标转换 gaps转换为百度地图坐标
+           * */
+           var x = 121.515698,//gps 经纬度 31.300119, 121.515698
+               y = 31.300119;
+
+           var map = new BMap.Map('container'),
+               point = new BMap.Point(x,y);
+
+           map.centerAndZoom(point,15);
+
+           //添加gps mark 和 label
+           var markergg = new BMap.Marker(point);
+           map.addOverlay(markergg);
+           var labelgg = new BMap.Label('未转换的gps坐标（错误）',{offset:new BMap.Size(20,-10)});
+           markergg.setLabel(labelgg);
+
+           //坐标转换后的回调函数
+           translateCallback = function(data){
+               if(data.status === 0){
+                   var markergg = new BMap.Marker(data.points[0]);
+                   map.addOverlay(markergg);
+                   var labelgg = new BMap.Label('转换后的gps坐标（正确）',{offset:new BMap.Size(20,-10)});
+                   markergg.setLabel(labelgg);
+                   map.setCenter(data.points[0]);
+               }
+           }
+           setTimeout(function(){
+               var convertor = new BMap.Convertor();
+               var pointArr = [];
+               pointArr.push(point);
+               convertor.translate(pointArr,1,5,translateCallback)
+           },1000)
+
+            /*
+            * 坐标转换验证
+            * */
+//            var x = 121.5177827373,
+//                y = 31.2997722788;
+//            var point = new BMap.Point(x,y)
+//            var convertor = new BMap.Convertor();
+//            var pointArr = [];
+//            pointArr.push(point);
+//            console.log(x);
+//            console.log(y);
+//            function callback(data){
+//                console.log(data)
+//            }
+//            convertor.translate(pointArr,1,5,callback);
+        }
+    </script>
+</body>
+</html>
