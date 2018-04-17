@@ -2,13 +2,62 @@
 <html>
 <head>
     <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <title>Title of the document</title>
+    <title>fetch...</title>
+    <style type="text/css">
+        button{
+            width:50px;
+            height:25px;
+            background:red;
+            color:#fff;
+        }
+    </style>
 </head>
 
 <body>
-The content of the document......
+    <button onclick="handlClick()">发送ajax</button>
 <script>
+    function handlClick(){
 
+//        var request = new Request('https://www.easy-mock.com/mock/5ad41be219c30a0bd7a21d86/example/upload',
+//            {
+//                method: 'POST',
+//                headers: new Headers({
+//                    'Content-Type': 'application/json; charset=unicode'
+//                })
+//            }
+//        )
+
+        /*
+        * 待排查中...
+        * */
+//        var content = {some: 'content'};
+//        var option = {
+//                'method':'POST',
+//                'headers':{
+//                    'Content-Type': 'application/json; charset=unicode'
+//                },
+//                body:JSON.stringify(content)
+//            };
+//        fetch('https://www.easy-mock.com/mock/5ad41be219c30a0bd7a21d86/example/upload',option).then(function(res){
+//            console.log(res);
+//        }).catch(function(er){console.log(er)});
+
+        /*
+        * 一个简单的fetch请求。。。
+        * */
+
+        fetch('https://www.easy-mock.com/mock/5ad41be219c30a0bd7a21d86/example/upload',{method:'POST',headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json;charset=unicode'
+        }})
+            .then(function(response) {
+                console.log(response);
+            })
+            .then(function(myJson) {
+
+            });
+
+    }
 </script>
 </body>
 </html>
