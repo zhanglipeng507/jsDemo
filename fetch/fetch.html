@@ -14,9 +14,10 @@ The content of the document......
         console.log(headers);
         console.log(headers)
         console.log(headers.has("Content-Type"));
-        headers.set("Content-Type", "text/xml;Charset=utf-8");
+        headers.set("Content-Type", "application/json;charset=utf-8");
+        headers.append("Accept-Charset","utf-8");
 
-        fetch('www.pengpengzhang.com',{
+        fetch('http://localhost:63342/jsDemo/mockData/fetche1.json',{
             headers:headers,
             cache:'no-cache'
         }).then(function(res){
