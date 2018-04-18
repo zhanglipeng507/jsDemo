@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>面向对象</title>
+</head>
+
+<body>
+The content of the document......
+<script>
+    class Person{
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        showName() {
+            console.log(this.name);
+        }
+    }
+    var  person = new Person('zhang','26')
+
+    person.showName();
+
+    class Personson extends Person{
+        constructor(){
+            super();
+            this.name = 'peng';
+        }
+    }
+    var personson = new Personson('li');
+
+    Personson.prototype.showName = () => {console.log('你被骗了！')}
+
+    personson.showName();
+
+    console.log(personson.__proto__);
+    console.log(Personson.prototype);
+    console.log(Person.prototype);
+</script>
+</body>
+</html>

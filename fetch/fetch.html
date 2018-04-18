@@ -11,17 +11,16 @@ The content of the document......
 <script>
     function handleClick (){
         var headers = new Headers();
-        console.log(headers);
-        console.log(headers)
         console.log(headers.has("Content-Type"));
         headers.set("Content-Type", "application/json;charset=utf-8");
         headers.append("Accept-Charset","utf-8");
 
         fetch('http://localhost:63342/jsDemo/mockData/fetche1.json',{
             headers:headers,
-            cache:'no-cache'
+            cache:'no-cache',
+            method:'post'
         }).then(function(res){
-            console.log(res);
+            res.json().then((data) => {console.log(data)});
         })
     }
 </script>
