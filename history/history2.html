@@ -13,6 +13,7 @@ history2...
     console.log(len);
 
     function handlClick (){
+        console.log('onpopstate: ')
         history.go(`-${len-1}`)
     }
 //    history.pushState({page: 2}, "title 2", "");
@@ -32,7 +33,7 @@ history2...
 //    }
 
     pushHistory();
-    //window.addEventListener("popstate",handlClick, false);
+    window.addEventListener("popstate",handlClick, false);
     function pushHistory() {
         var state = {
             title: "title",
