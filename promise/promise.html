@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8"/>
+    <title>promise用法</title>
+</head>
+
+<body>
+The content of the document......
+<script>
+
+/*
+* Promise.all  方法验证
+*
+* */
+
+//    let p1 = new Promise(function(resolve,reject){
+//        resolve('a');
+//    })
+//
+//    let p2 = new Promise(function(resolve,reject){
+//        resolve('b');
+//    })
+//
+//    let p = Promise.all([p1,p2]);
+//
+//    p.then(function(res){
+//        console.log(res)
+//    })
+
+
+
+/*
+* Promise 实例 then 的链式调用！
+* */
+
+    let promise = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            resolve('hahah')
+            //reject('wrong!!!')
+        },1500)
+    });
+
+    promise.then((data) => {
+                console.log(`我是第一个then：${data}`)
+                return data
+            },(erro) => {
+                console.log(erro) ;
+                return erro
+            })
+            .then((data) => {
+                console.log(`我是第二个then：${data}`)
+                return new Promise((resolve,reject) => {
+                    setTimeout(() => {
+                        resolve('fff')
+                    },3000)
+                })
+            },(erro) => {
+                console.log(`我是第二个erro下的then：${erro}`)
+            })
+            .then((data) => {
+                console.log(`我是第san个then：${data}`)
+                return new Promise((resolve,reject) => {
+                    resolve("我来自第三个then的resolve")
+                })
+            },(erro) => {
+                console.log(`我是的三个erro的then：${erro}`)
+            })
+            .then((data) => {
+                console.log(`我是第四个then：${data}`)
+            },(erro) => {
+                console.log(`我是第四个then的erro状态：${erro}`)
+            })
+
+    /*
+    * then方法会返回一个Promise，而它的行为与then方法中的回调函数的返回值有关！！！
+    *
+    *   在上面的这种链式调用中：
+    *       1，如果then的回调函数返回了一个值，那么then返回的Promise就是接受状态（执行了resolve）；后面的then就会执行它对应的resolve的回调函数；
+    *       2，如果then的回调函数抛出了错误，那么then返回的Promise就是拒绝状态（执行了reject）；后面的then就会执行它对应的reject的回调函数；
+    *                                                       注意： 此时如果没有这个reject函数 就会报错从而阻断 后面代码的执行
+    *
+    *       3，如果then的回调函数返回了一个已经是接受状态的Promise，那么then返回的Promise也会成为接受状态，同理，若是拒绝状态 则也会是拒绝状态！后面的
+    *           then回去执行对应的拒绝或接受回调！
+    *
+    *       4，如果then的回调函数返回一个pending状态的Promise的话，then返回的Promise也是pending的 并且最后的结果也会相同！
+    *
+    * */
+
+</script>
+</body>
+</html>
