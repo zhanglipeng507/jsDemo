@@ -71,6 +71,11 @@ The content of the document......
             },(erro) => {
                 console.log(`我是第四个then的erro状态：${erro}`)
             })
+            .then((data) => {
+                console.log(`我是第五个then的resolve：${data}`)
+            },(erro) => {
+                console.log(`我是第五个then的reject：${erro}`)
+            })
 
     /*
     * then方法会返回一个Promise，而它的行为与then方法中的回调函数的返回值有关！！！
@@ -84,6 +89,8 @@ The content of the document......
     *           then回去执行对应的拒绝或接受回调！
     *
     *       4，如果then的回调函数返回一个pending状态的Promise的话，then返回的Promise也是pending的 并且最后的结果也会相同！
+    *
+    *       5, 如果then的回调函数什么也不返回，那么从上面的测试来看 then仍然会放回一个Promise resolve 状态的 只不过 没有任何值！
     *
     * */
 

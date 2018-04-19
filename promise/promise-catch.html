@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>promise-catch</title>
+</head>
+
+<body>
+The content of the document......
+<script>
+    var p = new Promise((resolve,reject) => {
+        resolve('exp1');
+    })
+
+    p.then((e) => {
+        consoe.log(`No.1: ${e}`)
+        return e
+    },(er) => {
+        console.log(er)
+    }).then((e) => {
+        console.log(`No.2: ${e}`)
+        return e
+    },(er) => {
+        console.log(`No.2 msg from erro: ${er}`)
+    }).then((e) => {
+        console.log(`No.3: ${e}`)
+    }).catch((er) => {
+        console.log(`msg from catch: ${er}`)
+    })
+</script>
+</body>
+</html>
