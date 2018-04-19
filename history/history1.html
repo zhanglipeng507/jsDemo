@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>history1</title>
+</head>
+
+<body>
+history1......
+<a href="./history2.html">下一页</a>
+<script>
+//    var len = window.history.length;
+//    console.log(len);
+
+//    history.replaceState({page:3}, "page 3", "")
+
+//    history.pushState({page: 1}, "title 1", "");
+//
+//    window.onpopstate = function(){
+//        console.log(len);
+//    }
+//    window.onpopstate = function(event) {
+//        alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+//    };
+//    window.addEventListener('popstate', function(e) {
+//        alert('back')
+//    }, false);
+//
+//    window.onbeforeunload = function(){
+//        console.log('aa')
+//        history.replaceState({page:3}, "page 3", "")
+//    }
+    pushHistory();
+    window.addEventListener("popstate", function(e) {
+        var len = history.length;
+        console.log(len)
+        history.go(-999);
+        //alert("我监听到了浏览器的返回按钮事件啦");//根据自己的需求实现自己的功能
+    }, false);
+    function pushHistory() {
+        var state = {
+            title: "title",
+            url: ""
+        };
+        window.history.pushState(state, "title", "");
+    }
+</script>
+</body>
+</html>

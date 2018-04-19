@@ -13,7 +13,7 @@ The content of the document......
     })
 
     p.then((e) => {
-        consoe.log(`No.1: ${e}`)
+        console.log(`No.1: ${e}`)
         return e
     },(er) => {
         console.log(er)
@@ -21,11 +21,19 @@ The content of the document......
         console.log(`No.2: ${e}`)
         return e
     },(er) => {
-        console.log(`No.2 msg from erro: ${er}`)
+        console.log(`No.2 msg from erro: ${er}`) //管道调用时 前面的错误会在这里被捕获！后面的 "catch"就捕获不到了！
     }).then((e) => {
-        console.log(`No.3: ${e}`)
-    }).catch((er) => {
-        console.log(`msg from catch: ${er}`)
+        consle.log(`No.3: ${e}`)                //catch() 方法返回一个Promise，并且处理拒绝的情况。
+    }).catch((er) => {                          // 它的行为与调用Promise.prototype.then(undefined, onRejected) 相同。
+        console.log(`msg from catch: ${er}`)    //(事实上, calling obj.catch(onRejected) 内部calls obj.then(undefined, onRejected)).
+//        return new Promise((resolve,reject) => {
+//            resolve('I am from wrong!');
+//        })
+        return 'I am from catch'
+    }).then((msg) => {
+        console.log(`catch后的then的resolve: ${msg}`)//所以 果然catch也会返回一个Promise
+    },(erro) => {
+        console.log(`catch后的then的reject：${erro}`)
     })
 </script>
 </body>
