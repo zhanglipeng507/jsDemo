@@ -9,11 +9,18 @@
  * */
 function handleBrowBack(num){
 
-    window.addEventListener("popstate",handlePopstate, false);
-    window.history.pushState({}, "", "");
+    if(history.pushState){
+        history.pushState({}, "", "");
+        window.addEventListener("popstate",handlePopstate, false);
+    }
 
     function handlePopstate (){
-        var len = window.history.length;
-        history.go(-(len - 1 - num));
+        try{
+            var len = window.history.length;
+            history.go(-(len - 1 - num));
+        }catch(e){
+            console.log(e)
+        }
+
     }
 }
