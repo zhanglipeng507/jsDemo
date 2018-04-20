@@ -7,13 +7,10 @@
 
 <body>
 history4...
-<script>
-    var len = window.history.length;
-//    window.onpopstate = function(e){
-//        console.log(len);
-//        console.log(state)
-//        alert('stop')
-//    }
+<script src="./handleBrowBack.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+    window.onload = function(){handleBrowBack(1);};
 </script>
 </body>
 </html>

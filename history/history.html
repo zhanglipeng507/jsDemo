@@ -25,21 +25,21 @@ history...
 //        return true;
 //    }
 
-     pushHistory();
-     window.addEventListener("popstate",handlClick, false);
-     function pushHistory() {
-         var state = {
-             title: "title",
-             url: ""
-         };
-         window.history.pushState(state, "title", "");
-     }
-     function handlClick (){
-         var len = window.history.length;
-         console.log(len);
-         console.log(history.go);
-         history.go(`-${len-1}`);
-     }
+//     pushHistory();
+//     window.addEventListener("popstate",handlClick, false);
+//     function pushHistory() {
+//         var state = {
+//             title: "title",
+//             url: ""
+//         };
+//         window.history.pushState(state, "title", "");
+//     }
+//     function handlClick (){
+//         var len = window.history.length;
+//         console.log(len);
+//         console.log(history.go);
+//         history.go(`-${len-1}`);
+//     }
 </script>
 </body>
 </html>
