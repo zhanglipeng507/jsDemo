@@ -7,7 +7,7 @@
  *      示例 ： 返回第一个页面 入参num为 1 返回第二个页面 入参num为 2 ...
  * @return undefind
  * */
-function handleBrowBack(num){
+function browBackToTarget(num){
 
     if(history.pushState){
         history.pushState({}, "", "");
