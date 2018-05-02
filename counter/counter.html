@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>js 计算精度处理</title>
+</head>
+
+<body>
+The content of the document......
+<script>
+//    const numAdd  =  function(num1, num2) { //加法
+//
+//        var baseNum, baseNum1, baseNum2,num1Int,num1Dec,num2Int,num2Dec;
+//
+//        try {
+//            num1Int = num1.toString().split(".")[0];
+//            num1Dec = num1.toString().split(".")[1];
+//            baseNum1 = num1Dec.length;
+//            num1Dec = parseInt(num1Dec);
+//        } catch (e) {
+//            baseNum1 = 0;
+//        }
+//        try {
+//            num2Int = num2.toString().split(".")[0];
+//            num2Dec = num2.toString().split(".")[1];
+//            baseNum2 = num2Dec.length;
+//            num2Dec = parseInt(num2Dec);
+//        } catch (e) {
+//            baseNum2 = 0;
+//        }
+//
+//        baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+//
+//        return (num1Int * baseNum + num1Dec + num2Int * baseNum + num2Dec)/baseNum;
+//
+//    };
+//
+//    console.log(numAdd(512.06,0.04));
+
+
+
+/*
+*
+* 下方 方法为正确方法
+*
+* 处理js 精度问题 方法
+* */
+
+    const numAdd  =  function(num1, num2) { //加法
+
+        var baseNum, baseNum1, baseNum2,number1,number2;
+
+        try {
+            baseNum1 = num1.toString().split(".")[1].length;
+        } catch (e) {
+            baseNum1 = 0;
+        }
+        try {
+            baseNum2 = num2.toString().split(".")[1].length;
+        } catch (e) {
+            baseNum2 = 0;
+        }
+
+        try {
+            number1 = parseInt(num1.toString().replace('.',''));
+            number2 = parseInt(num2.toString().replace('.',''));
+
+            if(baseNum1 > baseNum2){
+                number2 = number2 * Math.pow(10,(baseNum1 - baseNum2))
+            }else if(baseNum1 < baseNum2){
+                number1 = number1 * Math.pow(10,(baseNum2 - baseNum1))
+            }
+        } catch (e) {
+            number1 = 0;
+            number2 = 0;
+        }
+
+        baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+
+        return (number1 + number2)/baseNum;
+
+    };
+
+    console.log(numAdd(512.0621,-2.003));
+
+</script>
+</body>
+</html>
