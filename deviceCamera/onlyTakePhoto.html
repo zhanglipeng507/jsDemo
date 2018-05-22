@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>h5仅仅只调用相机</title>
+    <style>
+        img{
+            width:200px;
+            height:200px;
+        }
+    </style>
+</head>
+<body>
+    <input id="#input" type="file" accept="image/*" capture="camera">
+<script>
+    var $input = document.getElementById('#input');
+
+    var fileReader = new FileReader();
+
+    var img = new Image();
+
+    var file = null;
+
+    $input.addEventListener('change',readFile,false);
+
+    function readFile (event) {
+         file = event.target.files[0];
+
+        fileReader.readAsDataURL(file);
+    }
+    //读取文件成功
+    fileReader.onload = function () {
+        console.log(this.result.length);
+        img.src = this.result;
+
+        var imgNode = document.createElement('img');
+        imgNode.src = this.result;
+        document.body.appendChild(imgNode);
+    }
+
+    img.onload = function () {
+        var width = this.width,
+            height = this.height;
+        console.log(width + "   :width");
+        //超过规定大小 压缩
+        if (file.size >= 1024) {
+
+        }
+    }
+</script>
+</body>
+</html>

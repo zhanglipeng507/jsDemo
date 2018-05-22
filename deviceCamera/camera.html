@@ -14,7 +14,7 @@ The content of the document......
     <input type="hidden" id="picIndex" value="0"/>
     <div id='image-list' class="row image-list">
         <input id="upload_image" type="file" name="image" accept="image/*" />
-        <div class="image-item space" onclick="showActionSheet()"></div>
+        <div class="image-item space" onclick="showActionSheet()" style="height:100px;"></div>
         <div class="image-up"></div>
     </div>
 <script>
@@ -25,19 +25,19 @@ The content of the document......
             entry.file( function(file){
                 var fileReader = new plus.io.FileReader();
                 fileReader.readAsDataURL(file);
-                <span style="white-space:pre;">  </span>   fileReader.onloadend = function(e) {
+                fileReader.onloadend = function(e) {
                     var picUrl = e.target.result.toString();
-                    var picIndex = $("#picIndex").val();
+                    var picIndex = document.getElementById("picIndex").val();
                     var nowIndex = parseInt(picIndex)+1;
-                    $("#picIndex").val(nowIndex);
+                    document.getElementById("picIndex").val(nowIndex);
                     var html = '';
                     html += '<div class="image-item " id="item'+nowIndex+'">';
                     html += '<div class="image-close" onclick="delPic('+nowIndex+')">X</div>';
                     html += '<div><img src="'+picUrl+'" class="upload_img" style="width:100%;height:100%;"/></div>';
                     html += '</div>';
-                    html += $("#image-list").html();
-                    $("#image-list").html(html);
-                    <span style="white-space:pre;">  </span>}
+                    html += document.getElementById("#image-list").html();
+                    document.getElementById("#image-list").html(html);
+                }
             });
         });
     }
@@ -74,13 +74,18 @@ The content of the document......
     }
     //从相册选择照片
     function galleryImgs() {
-        plus.gallery.pick(function(e) {
-            var name = e.substr(e.lastIndexOf('/') + 1);
-            compressImage(e,name);
-        }, function(e) {
-        }, {
-            filter: "image"
-        });
+        try{
+            plus.gallery.pick(function(e) {
+                var name = e.substr(e.lastIndexOf('/') + 1);
+                compressImage(e,name);
+            }, function(e) {
+            }, {
+                filter: "image"
+            });
+        } catch (e) {
+            alert(e)
+        }
+
     }
 
     //点击事件，弹出选择摄像头和相册的选项
