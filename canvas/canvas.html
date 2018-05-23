@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Title of the document</title>
+    <style>
+        img{
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+<img id="img" src="../images/testTuPian.jpeg"/>
+<script>
+
+    var Oimg = document.getElementById('img');
+
+    Oimg.onload = function () {
+        var canvas = document.createElement('canvas');
+
+        var width = this.width,
+            height = this.height;
+
+        var width_m = height / 2,
+            height_m = width / 2;
+
+        canvas.width = height;
+        canvas.height = width;
+
+        document.body.appendChild(canvas);
+
+        var ctx = canvas.getContext('2d');
+
+        ctx.save();
+
+        ctx.translate(width_m, height_m);
+
+        ctx.rotate(90 * Math.PI / 180);
+
+        ctx.drawImage(Oimg, -height_m, -width_m, width, height);
+
+        ctx.restore();
+
+    }
+
+
+</script>
+</body>
+</html>
