@@ -5,12 +5,31 @@
     <title>h5仅仅只调用相机</title>
     <style>
         img{
-            width:200px;
+            width: 200px;
+        }
+        .btn{
+            width: 100px;
+            height: 30px;
+            position: relative;
+            border: 1px solid #ddd;
+            text-align: center;
+            line-height: 30px;
+        }
+        .btn input{
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
         }
     </style>
 </head>
 <body>
-    <input id="#input" type="file" accept="image/*" capture="camera">
+    <div class="btn">
+        点击拍照
+        <input id="#input" type="file" accept="image/*" capture="camera">
+    </div>
 <script type="text/javascript" src="../lib/exif.js"></script>
 <script>
     var $input = document.getElementById('#input');
@@ -43,23 +62,25 @@
         var orient = getPhotoOrientation(this);
 
         //超过规定大小 压缩
-        if (file.size >= 1024) {
+        if (file.size >= 10 * 1024) {
 
             var canvas = document.createElement('canvas');
 
-            var width = this.width,
-                height = this.height;
+            var width = this.width / 2,
+                height = this.height / 2;
 
             canvas.width = width;
             canvas.height = height;
 
             var ctx = canvas.getContext('2d');
 
-
+            //图片压缩质量控制（依据某种算法）
+            var quality = ( 10 * 1024 / file.size).toFixed(1);
 
             //原始图片是旋转的
             if (orient == '6') {
 
+                //可控制 压缩图片 规格（长 宽）
                 var width_m = height / 2,
                     height_m = width / 2;
 
@@ -81,12 +102,19 @@
             }
 
 
-            var base = canvas.toDataURL('image/jpeg', 0.5);
+            var base = canvas.toDataURL('image/jpeg', Number(quality));
 
             var imgNode = document.createElement('img');
             imgNode.src = base;
             imgNode.alt = 'fromCanvas';
             document.body.appendChild(imgNode);
+
+            let fromData = {
+                imgData: base
+            }
+
+            //上传图片
+            //ajaxUploadImg(fromData,url)
 
         }
     }
