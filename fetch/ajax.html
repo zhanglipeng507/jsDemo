@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta Charset="UTF-8" name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>ajax请求及跨域测试</title>
+</head>
+
+<body>
+    <button id="btn">点我发起ajax 请求</button>
+<script>
+    document.getElementById('btn').onclick = function () {
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+
+        xhr.open('get', 'http://localhost:8000/data.json',true);
+
+        //每当xhr的readyState的值发生改变 就会触发该函数
+        xhr.onreadystatechange = function () {
+
+            if(xhr.readyState == '2'){ //readyState xhr的一个属性（值： 1 2 3 4） 记录xhr的状态
+                console.log('请求已被接收！')
+            }
+
+            if(xhr.readyState == '4' && xhr.status == '200'){// status 可以理解为 这个请求目前的状态 200 ok（数据已拿到）
+                console.log('responseText:   '  + xhr.responseText);
+
+                var resData = JSON.parse(xhr.responseText);
+                var span = document.createElement('span');
+                span.innerHTML = resData.key5 + ' 另一个值为： ' + resData.key6;
+                document.body.appendChild(span);
+            }
+        };
+
+        xhr.send();
+    }
+
+</script>
+</body>
+</html>
